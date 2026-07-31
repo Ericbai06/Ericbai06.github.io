@@ -23,6 +23,7 @@ I am applying to Ph.D. programs for Fall 2027.
 
 I work on evolving LLM agents and reasoning: how agents select and reuse skills as they
 solve tasks in various environments, and how the reasoning behind those decisions can be
-made legible enough to act on.
+made legible enough to act on — by reinforcement learning, by explicit structure, or by
+whatever else turns an analysis into a handle.
 
 I can be reached at [tbai22@m.fudan.edu.cn](mailto:tbai22@m.fudan.edu.cn).
