@@ -19,7 +19,6 @@ latest_posts:
 
 I am an undergraduate in Software Engineering at
 [Fudan University](https://www.fudan.edu.cn/en/), graduating in June 2027.
-I am applying to Ph.D. programs for Fall 2027.
 
 I work on evolving LLM agents and reasoning: how agents select and reuse skills as they
 solve tasks in various environments, and how the reasoning behind those decisions can be
