@@ -1,0 +1,345 @@
+{% assign equal_contrib_limit = entry.equal_contrib | default: 0 | plus: 0 %}
+{% assign has_media = false %}
+{% if site.enable_publication_thumbnails and entry.preview %}
+  {% assign has_media = true %}
+{% endif %}
+
+<article id="{{ entry.key }}" class="pub-card{% if has_media %} has-media{% endif %}">
+  {% if has_media %}
+    <div class="pub-card-media">
+      {% assign preview_src = entry.preview %}
+      {% unless preview_src contains '://' or preview_src contains '/' %}
+        {% assign preview_src = entry.preview | prepend: '/assets/img/publications/' %}
+      {% endunless %}
+      <img
+        src="{{ preview_src | relative_url }}"
+        width="960"
+        height="540"
+        alt="{{ entry.title | escape }}"
+        loading="eager"
+        data-zoomable
+      >
+    </div>
+  {% endif %}
+
+  <div class="pub-card-body">
+    <div class="pub-kickers">
+      {% if entry.venue_label or entry.abbr %}
+        <span class="pub-venue-badge">
+          {% if entry.venue_icon == 'acl' %}
+            <svg
+              class="pub-venue-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+          {% elsif entry.venue_icon == 'acm' %}
+            <svg
+              class="pub-venue-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 2 22 12 12 22 2 12Z"/>
+              <path d="m8 12 4-4 4 4-4 4Z"/>
+            </svg>
+          {% endif %}
+          <span>{{ entry.venue_label | default: entry.abbr }}</span>
+        </span>
+      {% endif %}
+
+      <div class="pub-actions">
+        {% if entry.arxiv %}
+          <a
+            class="pub-action-icon"
+            href="https://arxiv.org/abs/{{ entry.arxiv }}"
+            aria-label="arXiv"
+            data-pub-tooltip="arXiv"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <path d="m9.5 13 5 5"/>
+              <path d="m14.5 13-5 5"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.html %}
+          {% assign html_href = entry.html %}
+          {% unless html_href contains '://' %}
+            {% assign html_href = entry.html | prepend: '/assets/html/' | relative_url %}
+          {% endunless %}
+          {% assign html_tip = entry.paper_label | default: 'Paper' %}
+          <a
+            class="pub-action-icon"
+            href="{{ html_href }}"
+            aria-label="{{ html_tip | escape }}"
+            data-pub-tooltip="{{ html_tip | escape }}"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.doi %}
+          {% assign doi_tip = entry.paper_label | default: 'DOI' %}
+          <a
+            class="pub-action-icon"
+            href="https://doi.org/{{ entry.doi }}"
+            aria-label="{{ doi_tip | escape }}"
+            data-pub-tooltip="{{ doi_tip | escape }}"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.pdf %}
+          {% assign pdf_href = entry.pdf %}
+          {% unless pdf_href contains '://' %}
+            {% assign pdf_href = entry.pdf | prepend: '/assets/pdf/' | relative_url %}
+          {% endunless %}
+          <a
+            class="pub-action-icon"
+            href="{{ pdf_href }}"
+            aria-label="PDF"
+            data-pub-tooltip="PDF"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.code %}
+          <a
+            class="pub-action-icon"
+            href="{{ entry.code }}"
+            aria-label="GitHub"
+            data-pub-tooltip="GitHub"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 1.27a11 11 0 0 0-3.48 21.46c.55.1.75-.24.75-.53v-1.85c-3.06.66-3.71-1.48-3.71-1.48-.5-1.27-1.22-1.61-1.22-1.61-1-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.68 2.57 1.2 3.2.92.1-.71.38-1.2.69-1.47-2.44-.28-5.01-1.22-5.01-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.92 0 0 .92-.3 3.02 1.13a10.5 10.5 0 0 1 5.5 0c2.1-1.43 3.02-1.13 3.02-1.13.6 1.52.22 2.64.11 2.92.7.77 1.13 1.75 1.13 2.95 0 4.22-2.58 5.15-5.03 5.42.39.34.75 1.01.75 2.04v3.03c0 .3.2.64.76.53A11 11 0 0 0 12 1.27Z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.website %}
+          <a
+            class="pub-action-icon"
+            href="{{ entry.website }}"
+            aria-label="Website"
+            data-pub-tooltip="Website"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.slides %}
+          {% assign slides_href = entry.slides %}
+          {% unless slides_href contains '://' %}
+            {% assign slides_href = entry.slides | prepend: '/assets/pdf/' | relative_url %}
+          {% endunless %}
+          <a
+            class="pub-action-icon"
+            href="{{ slides_href }}"
+            aria-label="Slides"
+            data-pub-tooltip="Slides"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.poster %}
+          {% assign poster_href = entry.poster %}
+          {% unless poster_href contains '://' %}
+            {% assign poster_href = entry.poster | prepend: '/assets/pdf/' | relative_url %}
+          {% endunless %}
+          <a
+            class="pub-action-icon"
+            href="{{ poster_href }}"
+            aria-label="Poster"
+            data-pub-tooltip="Poster"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.blog %}
+          <a
+            class="pub-action-icon"
+            href="{{ entry.blog }}"
+            aria-label="Blog"
+            data-pub-tooltip="Blog"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if entry.award %}
+          <a class="award pub-toggle-pill pub-toggle-award" href="#" role="button">
+            {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}
+          </a>
+        {% endif %}
+        {% if entry.abstract %}
+          <a class="abstract pub-toggle-pill" href="#" role="button">Abs</a>
+        {% endif %}
+        {% if entry.bibtex_show %}
+          <a class="bibtex pub-toggle-pill" href="#" role="button">Bib</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="pub-card-title">{{ entry.title }}</div>
+
+    <div class="pub-card-authors">
+      {%- assign author_array_size = entry.author_array | size -%}
+      {%- assign author_array_limit = author_array_size -%}
+      {%- if site.max_author_limit and author_array_size > site.max_author_limit -%}
+        {%- assign author_array_limit = site.max_author_limit -%}
+      {%- endif -%}
+
+      {%- for author in entry.author_array limit: author_array_limit -%}
+        {%- assign author_is_self = false -%}
+        {%- assign author_last_name = author.last | regex_replace: '[*∗†‡§¶‖&^]', '' -%}
+        {%- assign author_last_html = author.last | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
+        {%- if site.scholar.last_name contains author_last_name -%}
+          {%- if site.scholar.first_name contains author.first -%}
+            {%- assign author_is_self = true -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- assign is_equal_contrib = false -%}
+        {%- if equal_contrib_limit > 0 and forloop.index <= equal_contrib_limit -%}
+          {%- assign is_equal_contrib = true -%}
+        {%- endif -%}
+
+        {%- assign coauthor_url = null -%}
+        {%- assign clean_last_name = author_last_name | downcase | remove_accents -%}
+        {%- if site.data.coauthors[clean_last_name] -%}
+          {%- for coauthor in site.data.coauthors[clean_last_name] -%}
+            {%- if coauthor.firstname contains author.first -%}
+              {%- assign coauthor_url = coauthor.url -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if forloop.length > 1 -%}
+          {%- if forloop.first == false -%}
+            {%- if forloop.length > 2 -%}{{ ', ' }}{%- elsif forloop.length == 2 -%}{{ ' ' }}{%- endif -%}
+          {%- endif -%}
+          {%- if forloop.last and author_array_limit == author_array_size -%}{{ 'and ' }}{%- endif -%}
+        {%- endif -%}
+
+        {%- if author_is_self -%}
+          <span class="pub-author-self">
+            {{- author.first }} {{ author_last_html -}}
+            {%- if is_equal_contrib -%}<sup>*</sup>{%- endif -%}
+          </span>
+        {%- elsif coauthor_url -%}
+          <a class="pub-author-link" href="{{ coauthor_url }}">
+            {{- author.first }} {{ author_last_html -}}
+          </a>
+          {%- if is_equal_contrib -%}<sup>*</sup>{%- endif -%}
+        {%- else -%}
+          {{- author.first }} {{ author_last_html -}}
+          {%- if is_equal_contrib -%}<sup>*</sup>{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- assign more_authors = author_array_size | minus: author_array_limit -%}
+      {%- assign more_authors_hide = more_authors | append: ' more author' -%}
+      {% if more_authors > 0 %}
+        {%- if more_authors > 1 -%}
+          {% assign more_authors_hide = more_authors_hide | append: 's' %}
+        {%- endif -%}
+        {% assign more_authors_show = '' %}
+        {%- for author in entry.author_array offset: author_array_limit -%}
+          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: author.last %}
+          {% unless forloop.last %}
+            {% assign more_authors_show = more_authors_show | append: ', ' %}
+          {% endunless %}
+        {%- endfor -%}
+        {%- assign more_authors_show = more_authors_show | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
+        , and
+        <span
+          class="more-authors"
+          title="click to view {{ more_authors_hide }}"
+          onclick="
+              var element = this;
+              element.setAttribute('title', '');
+              var more_authors_text = element.textContent == '{{ more_authors_hide }}' ? '{{ more_authors_show }}' : '{{ more_authors_hide }}';
+              var cursorPosition = 0;
+              var textAdder = setInterval(function(){
+                element.innerHTML = more_authors_text.substring(0, cursorPosition + 1);
+                if (++cursorPosition == more_authors_text.length){
+                  clearInterval(textAdder);
+                }
+            }, '{{ site.more_authors_animation_delay }}');
+          "
+        >
+          {{- more_authors_hide -}}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if entry.award %}
+    <div class="award hidden pub-drawer d-print-inline">
+      <p>{{ entry.award | markdownify }}</p>
+    </div>
+  {% endif %}
+
+  {% if entry.abstract %}
+    <div class="abstract hidden pub-drawer">
+      <p>{{ entry.abstract }}</p>
+    </div>
+  {% endif %}
+
+  {% if entry.bibtex_show %}
+    <div class="bibtex hidden pub-drawer">
+      {% highlight bibtex %}
+      {{- entry.bibtex | hideCustomBibtex -}}
+      {% endhighlight %}
+    </div>
+  {% endif %}
+</article>

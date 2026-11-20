@@ -1,0 +1,17 @@
+{% if site.data.awards %}
+  <ol class="award-year-list">
+    {% for item in site.data.awards %}
+      <li>
+        <span class="award-year">{{ item.year }}</span>
+        <span class="award-title">{{ item.title }}</span>
+        {% if item.note or item.prize %}
+          <span class="award-note">
+            {%- if item.note %}{{ item.note }}{% endif -%}
+            {%- if item.note and item.prize %}<span class="award-sep" aria-hidden="true">·</span>{% endif -%}
+            {%- if item.prize %}<span class="award-prize">{{ item.prize }}</span>{% endif -%}
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+{% endif %}

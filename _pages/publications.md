@@ -17,4 +17,6 @@ nav_order: 1
 
 {% bibliography %}
 
+<p class="pub-footnote">* Equal contribution.</p>
+
 </div>

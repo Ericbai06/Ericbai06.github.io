@@ -4,6 +4,7 @@ title: about
 permalink: /
 
 selected_papers: true
+awards: true
 social: true
 
 announcements:

@@ -2,13 +2,17 @@
 ---
 
 @inproceedings{bai2026skilldag,
-  abbr={Findings},
+  abbr={EMNLP Findings},
+  venue_label={EMNLP 2026 Findings},
+  venue_icon={acl},
+  equal_contrib={2},
   title={SkillDAG: Self-Evolving Typed Skill Graphs for LLM Skill Selection at Scale},
   author={Bai, Tong and Wan, Zhenglin and Zhou, Pengfei and Yu, Xingrui and You, Yang and Tsang, Ivor W.},
   booktitle={Findings of the Association for Computational Linguistics: EMNLP 2026},
   year={2026},
   arxiv={2606.03056},
   code={https://github.com/Ericbai06/SkillDAG},
+  preview={skilldag.webp},
   bibtex_show={true},
   selected={true},
   abstract={As LLM agents adopt large skill libraries, selecting the right subset becomes a structural problem rather than a similarity-matching one: skills depend on, conflict with, specialize, or duplicate one another, a structure invisible to both full enumeration and embedding similarity. We present SkillDAG, which models inter-skill relationships as a typed directed graph and exposes it to an LLM agent as an inference-time, agent-callable structural retrieval interface, queried and evolved during execution rather than baked into a fixed retrieval pipeline: each search returns vector matches, typed-edge neighbors, and conflict signals, and a propose-then-commit protocol lets the agent register execution-backed edges so the graph accumulates structure across episodes. On ALFWorld and SkillsBench with MiniMax-M2.7, SkillDAG reaches 67.1% success and 27.3% reward, exceeding the strongest reported Graph-of-Skills baseline by +12.8 and +8.6 points; the advantage ports to gpt-5.2-codex, and intrinsic SkillsBench Ret@K rises from 65.5 to 78.2 under matched queries. These gains trace to isolable mechanisms: candidate ranking that stays robust as the pool grows 10x where a fixed seeding-diffusion pipeline degrades, and set-monotone online edits that enlarge ground-truth recall without evicting prior hits.}
@@ -16,11 +20,17 @@
 
 @inproceedings{chang2026unlocking,
   abbr={ACL},
+  venue_label={ACL 2026 Main},
+  venue_icon={acl},
+  equal_contrib={2},
   title={Unlocking the Black Box of Latent Reasoning: An Interpretability-Guided Approach to Intervention},
   author={Chang, Shuochen and Bai, Tong and Zhang, Xiaofeng and Ma, Qianli and Liu, Qingyang and Liao, Zhaohe and Miao, Yibo and Niu, Li},
   booktitle={Annual Meeting of the Association for Computational Linguistics (ACL)},
   year={2026},
   arxiv={2606.01243},
+  html={https://aclanthology.org/2026.acl-long.1568/},
+  paper_label={ACL Anthology},
+  preview={latent-reasoning.webp},
   bibtex_show={true},
   selected={true},
   abstract={Latent reasoning enables Large Language Models (LLMs) to perform multi-step inference within continuous hidden states, offering efficiency gains over explicit Chain-of-Thought (CoT). However, the opacity of these continuous thought vectors hinders their reliability and controllability. This paper bridges the gap between mechanistic interpretability and actionable control. We first present a systematic analysis using structural, causal, and geometric probes, revealing that latent vectors encode compressed, faithful representations of reasoning steps, with early vectors acting as critical causal hubs. Building on this, we operationalize these interpretability insights into a suite of training-free, decode-time interventions that refine the latent reasoning process by imposing the identified geometric and semantic priors. Extensive experiments across multiple model scales and diverse task domains demonstrate that our approaches consistently improve reasoning accuracy. Our interpretability-guided interventions consistently unlock latent capabilities and improve reasoning accuracy without any parameter updates.}
@@ -28,11 +38,16 @@
 
 @inproceedings{liu2026towards,
   abbr={ISSTA},
+  venue_label={ISSTA 2026},
+  venue_icon={acm},
   title={Towards Iterative End-to-End Software Development: A Feature-Driven Multi-Agent Framework},
   author={Liu, Junwei and Xu, Chen and Wang, Chong and Bai, Tong and Chen, Weitong and Wong, Kaseng and Lou, Yiling and Peng, Xin},
   booktitle={ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)},
   year={2026},
   arxiv={2511.02399},
+  doi={10.1145/3832298},
+  paper_label={ACM DL},
+  preview={evodev.webp},
   bibtex_show={true},
   selected={true},
   abstract={Recent advances in large language model agents offer the promise of automating end-to-end software development from natural language requirements. However, existing approaches largely adopt linear, waterfall-style pipelines, which oversimplify the iterative nature of real-world development and struggle with complex, large-scale projects. To address these limitations, we propose EvoDev, an iterative software development framework inspired by feature-driven development. EvoDev decomposes user requirements into a set of user-valued features and constructs a Feature Map, a directed acyclic graph that explicitly models dependencies between features. Each feature node in the feature map maintains multi-layer contexts, including business logic, software design, and code implementation, which are propagated along dependencies to provide context for subsequent development iterations. We evaluate EvoDev on challenging Android development tasks and show that it outperforms the best-performing baseline, Claude Code, by 57.3%, while improving single-agent performance by 16.0%-58.5% across different base LLMs, highlighting the importance of feature decomposition, dependency modeling, context propagation, and workflow-aware agent design for end-to-end software development.}
