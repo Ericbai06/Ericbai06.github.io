@@ -1,0 +1,19 @@
+.social.about-social {
+  margin-bottom: 1rem;
+  text-align: left;
+
+  .contact-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 2rem;
+    line-height: 1;
+
+    a {
+      display: inline-grid;
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+      place-items: center;
+    }
+  }
+}

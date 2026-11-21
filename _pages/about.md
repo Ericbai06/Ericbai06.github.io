@@ -26,5 +26,4 @@ solve tasks in various environments, and how the reasoning behind those decision
 made legible enough to act on — by reinforcement learning, by explicit structure, or by
 whatever else turns an analysis into a handle.
 
-**I am applying to CS PhD programs for Fall 2027.** I can be reached at
-[tbai22@m.fudan.edu.cn](mailto:tbai22@m.fudan.edu.cn).
+**I am applying to CS PhD programs for Fall 2027.**

@@ -40,6 +40,23 @@ layout: default
 
     <div class="clearfix">{{ content }}</div>
 
+    {% if page.social %}
+      {% assign scholar = site.data.socials.google_scholar %}
+      <div class="social about-social">
+        <div class="contact-icons">
+          <a href="mailto:{{ site.data.socials.email }}" title="Email" aria-label="Email">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="{{ scholar.url }}" title="{{ scholar.title }}" aria-label="{{ scholar.title }}">
+            <i class="{{ scholar.logo }}" aria-hidden="true"></i>
+          </a>
+        </div>
+        {% if site.contact_note %}
+          <div class="contact-note">{{ site.contact_note }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
       <h2>
@@ -69,15 +86,6 @@ layout: default
     {% if page.awards and site.data.awards %}
       <h2 id="awards" class="home-section-heading">Awards</h2>
       {% include awards.liquid %}
-    {% endif %}
-
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% social_links %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
     {% endif %}
 
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
