@@ -26,4 +26,8 @@ solve tasks in various environments, and how the reasoning behind those decision
 made legible enough to act on — by reinforcement learning, by explicit structure, or by
 whatever else turns an analysis into a handle.
 
+My favourite paper is
+[*Welcome to the Era of Experience*](https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf)
+by David Silver and Richard S. Sutton.
+
 **I am applying to CS PhD programs for Fall 2027.**
