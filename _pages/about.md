@@ -3,6 +3,11 @@ layout: about
 title: about
 permalink: /
 
+profile:
+  align: right
+  image: avatar.webp
+  image_circular: true
+
 selected_papers: true
 awards: true
 social: true
