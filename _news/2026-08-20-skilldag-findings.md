@@ -6,4 +6,4 @@ related_posts: false
 ---
 
 SkillDAG is accepted to Findings of EMNLP 2026.
-[[paper]](https://arxiv.org/abs/2606.03056) [[code]](https://github.com/Ericbai06/SkillDAG)
+[[paper]](https://aclanthology.org/2026.findings-emnlp.1022/) [[code]](https://github.com/Ericbai06/SkillDAG)
